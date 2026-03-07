@@ -103,7 +103,7 @@ class SatelliteImage {
   }
 }
 
-class SatelliteImageryAI {
+class SatelliteImagery {
   constructor() {
     this.images = new Map();
     this.analysisCache = new Map();
@@ -281,4 +281,4 @@ class SatelliteImageryAI {
   }
 }
 
-module.exports = SatelliteImageryAI;
+module.exports = SatelliteImagery;

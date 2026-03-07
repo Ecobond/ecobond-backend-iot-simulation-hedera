@@ -49,7 +49,7 @@ curl http://localhost:5000/api/solar/devices/{deviceId}/reading
 Example:
 
 ```bash
-curl http://localhost:5000/api/solar/devices/SOLAR-001/reading
+curl http://localhost:5000/api/solar/devices/1/reading
 ```
 
 #### 4. Get Historical Data for a Device
@@ -61,7 +61,7 @@ curl "http://localhost:5000/api/solar/devices/{deviceId}/history?limit=100"
 Example:
 
 ```bash
-curl "http://localhost:5000/api/solar/devices/SOLAR-001/history?limit=50"
+curl "http://localhost:5000/api/solar/devices/1/history?limit=50"
 ```
 
 Retrieves up to 1000 historical readings (default returns 100).
@@ -75,7 +75,7 @@ curl http://localhost:5000/api/solar/statistics/{deviceId}
 Example:
 
 ```bash
-curl http://localhost:5000/api/solar/statistics/SOLAR-001
+curl http://localhost:5000/api/solar/statistics/1
 ```
 
 Returns statistics including:
@@ -91,7 +91,7 @@ Returns statistics including:
 curl -X POST http://localhost:5000/api/solar/devices \
   -H "Content-Type: application/json" \
   -d '{
-    "deviceId": "SOLAR-005",
+    "deviceId": "5",
     "farmName": "New Farm Name",
     "capacity": 500
   }'
@@ -112,7 +112,7 @@ curl -X PATCH http://localhost:5000/api/solar/devices/{deviceId}/status \
 Example:
 
 ```bash
-curl -X PATCH http://localhost:5000/api/solar/devices/SOLAR-001/status \
+curl -X PATCH http://localhost:5000/api/solar/devices/1/status \
   -H "Content-Type: application/json" \
   -d '{"isOnline": false}'
 ```
