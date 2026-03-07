@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const itemRoutes = require("./routes/items");
 const solarRoutes = require("./routes/solar");
 const satelliteRoutes = require("./routes/satellite");
 const logger = require("./utils/logger");
@@ -17,7 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware);
 
 // Routes
-app.use("/api/items", itemRoutes);
 app.use("/api/solar", solarRoutes);
 app.use("/api/satellite", satelliteRoutes);
 

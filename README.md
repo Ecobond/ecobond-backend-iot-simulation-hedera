@@ -2,7 +2,6 @@
 
 Node.js/Express backend for eco monitoring demos, including:
 
-- Items CRUD API
 - Solar farm IoT simulator
 - Satellite imagery AI simulator
 - Structured app logging (Winston + Morgan)
@@ -35,7 +34,7 @@ Health check:
 
 - `npm run dev` - Start with nodemon
 - `npm start` - Start with Node.js
-- `npm test` - Placeholder test script
+
 
 ## Environment Variables
 
@@ -49,7 +48,6 @@ LOG_LEVEL=info
 
 ## API Base Paths
 
-- `/api/items`
 - `/api/solar`
 - `/api/satellite`
 
@@ -68,24 +66,6 @@ All endpoints return JSON. Most success responses use:
 
 - `GET /health` - Returns `{ "message": "Server is running" }`
 
-### Items API
-
-- `GET /api/items` - List all items
-- `GET /api/items/:id` - Get item by id
-- `POST /api/items` - Create item
-- `PUT /api/items/:id` - Update item
-- `DELETE /api/items/:id` - Delete item
-
-Example create request:
-
-```bash
-curl -X POST http://localhost:5000/api/items \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "New Item",
-    "description": "Demo item"
-  }'
-```
 
 ### Solar Simulator API
 
