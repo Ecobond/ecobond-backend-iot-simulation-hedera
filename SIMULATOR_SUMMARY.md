@@ -2,7 +2,7 @@
 
 ## What Has Been Built
 
-A comprehensive Node.js backend that combines:
+A comprehensive Bun backend that combines:
 
 1. **IoT Solar Farm Device Simulator** - Real-time energy monitoring
 2. **Satellite Imagery AI** - Forest monitoring & analysis
@@ -17,7 +17,7 @@ A comprehensive Node.js backend that combines:
 **Core:**
 
 - Express.js - Web framework
-- Node.js - Runtime
+- Bun - Runtime
 
 **Logging:**
 
@@ -26,7 +26,7 @@ A comprehensive Node.js backend that combines:
 
 **Development:**
 
-- nodemon - Auto-reload
+- bun --watch - Auto-reload
 - dotenv - Configuration
 
 ---
@@ -259,7 +259,7 @@ To add persistence:
 
 **Development:**
 
-- nodemon (2.0.20) - Auto-reload
+- bun --watch - Auto-reload
 
 ---
 
@@ -268,13 +268,13 @@ To add persistence:
 1. **Install dependencies:**
 
    ```bash
-   npm install
+   bun install
    ```
 
 2. **Start the server:**
 
    ```bash
-   npm start
+   bun start
    ```
 
 3. **Test endpoints:**

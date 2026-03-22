@@ -1,6 +1,6 @@
 # EcoBond Backend
 
-Node.js/Express backend for eco monitoring demos, including:
+Bun/Express backend for eco monitoring demos, including:
 
 - Solar farm IoT simulator
 - Satellite imagery AI simulator
@@ -8,7 +8,7 @@ Node.js/Express backend for eco monitoring demos, including:
 
 ## Tech Stack
 
-- Node.js
+- Bun
 - Express
 - CORS
 - dotenv
@@ -18,8 +18,8 @@ Node.js/Express backend for eco monitoring demos, including:
 ## Quick Start
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Server default:
@@ -32,8 +32,8 @@ Health check:
 
 ## Scripts
 
-- `npm run dev` - Start with nodemon
-- `npm start` - Start with Node.js
+- `bun run dev` - Start with bun --watch
+- `bun start` - Start with Bun
 
 
 ## Environment Variables
