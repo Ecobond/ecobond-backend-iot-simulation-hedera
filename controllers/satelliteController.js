@@ -1,4 +1,4 @@
-const SatelliteImageryAI = require("../simulators/SatelliteImageryAI");
+const SatelliteImageryAI = require("../simulators/SatelliteImagery");
 const logger = require("../utils/logger");
 
 // Initialize simulator

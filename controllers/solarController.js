@@ -165,6 +165,9 @@ exports.addDevice = (req, res) => {
   }
 };
 
+// Export simulator instance for oracle access
+exports.solarSimulator = solarSimulator;
+
 // Toggle device status
 exports.toggleDeviceStatus = (req, res) => {
   try {
