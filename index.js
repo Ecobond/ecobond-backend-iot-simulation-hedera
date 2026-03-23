@@ -3,8 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const solarRoutes = require("./routes/solar");
 const satelliteRoutes = require("./routes/satellite");
+const oracleRoutes = require("./routes/oracle");
 const logger = require("./utils/logger");
 const morganMiddleware = require("./utils/morgan");
+const oracleCron = require("./utils/oracleCron");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +20,7 @@ app.use(morganMiddleware);
 // Routes
 app.use("/api/solar", solarRoutes);
 app.use("/api/satellite", satelliteRoutes);
+app.use("/api/oracle", oracleRoutes);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
@@ -26,7 +29,7 @@ app.get("/health", (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {readings;
+app.use((err, req, res, next) => {
   logger.error("Unhandled error:", {
     message: err.message,
     stack: err.stack,
@@ -47,4 +50,24 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
   logger.info(`Server running on http://localhost:${PORT}`);
+
+  // Start the oracle cron if enabled (default: true)
+  const cronEnabled =
+    (process.env.ORACLE_CRON_ENABLED || "true").toLowerCase() !== "false";
+
+  if (cronEnabled) {
+    oracleCron.start();
+  } else {
+    logger.info("Oracle cron auto-start is disabled (ORACLE_CRON_ENABLED=false)");
+  }
 });
+
+// ─── Graceful shutdown ───────────────────────────────────────────────────────
+const shutdown = (signal) => {
+  logger.info(`\n${signal} received — shutting down gracefully...`);
+  oracleCron.stop();
+  process.exit(0);
+};
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));

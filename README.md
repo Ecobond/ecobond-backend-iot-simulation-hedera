@@ -134,6 +134,42 @@ Example forest-density analysis:
 curl "http://localhost:5000/api/satellite/analysis/forest-density?region=Amazon%20Basin&limit=5"
 ```
 
+## Oracle Cron Service
+
+The backend includes a built-in periodic Oracle service that reads simulated data from the IoT simulators and pushes impact scores to an on-chain Hedera EVM smart contract (`ProjectMod.sol`).
+
+By default, the cron runs every 60 seconds (configurable via `ORACLE_UPDATE_INTERVAL_MS`). It includes resilient retry logic with exponential backoff to handle transient RPC or network issues.
+
+### Data Flow
+
+```mermaid
+sequenceDiagram
+    participant Timer
+    participant OracleCron as Oracle Cron
+    participant Simulator as Solar Simulator
+    participant Hedera as Hedera EVM Contract
+    
+    Timer->>OracleCron: Interval Tick (e.g. 60s)
+    activate OracleCron
+    OracleCron->>Simulator: getStatistics()
+    Simulator-->>OracleCron: [creditQuality, greenImpact] per project
+    OracleCron->>Hedera: updateProjects(scores)
+    
+    alt Transaction Success
+        Hedera-->>OracleCron: Receipt (TxHash, Block)
+    else Transaction Failure
+        Hedera--xOracleCron: Error
+        OracleCron->>OracleCron: Retry with exponential backoff (up to 3 times)
+    end
+    deactivate OracleCron
+```
+
+### Cron Management Endpoints
+
+- `GET /api/oracle/cron/status` - View cron status, run history, and last transaction hash
+- `POST /api/oracle/cron/start` - Manually start the cron loop
+- `POST /api/oracle/cron/stop` - Manually stop the cron loop
+
 ## Logging
 
 Log files are created in `logs/`:
